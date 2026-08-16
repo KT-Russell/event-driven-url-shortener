@@ -24,7 +24,15 @@ def _get_sqs():
         return None
 
     import boto3
-    _sqs_client = boto3.client("sqs")
+
+    endpoint_url = os.environ.get("SQS_ENDPOINT_URL")
+
+    _sqs_client = boto3.client(
+        "sqs",
+        endpoint_url=endpoint_url,
+    )
+
+
     return _sqs_client
 
 

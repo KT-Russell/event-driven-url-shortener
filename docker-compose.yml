@@ -22,7 +22,11 @@ services:
     environment:
       DATABASE_URL: postgresql://app:localdev@postgres:5432/shortener
       REDIS_URL: redis://redis:6379
-      SQS_QUEUE_URL: ""
+      SQS_QUEUE_URL: http://localstack:4566/queue/eu-west-2/000000000000/click-events
+      SQS_ENDPOINT_URL: http://localstack:4566
+      AWS_DEFAULT_REGION: eu-west-2
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
       PORT: "8080"
     depends_on:
       - postgres
@@ -32,7 +36,11 @@ services:
     build: ./services/worker
     environment:
       DATABASE_URL: postgres://app:localdev@postgres:5432/shortener?sslmode=disable
-      SQS_QUEUE_URL: http://localstack:4566/000000000000/click-events
+      SQS_QUEUE_URL: http://localstack:4566/queue/eu-west-2/000000000000/click-events
+      SQS_ENDPOINT_URL: http://localstack:4566
+      AWS_DEFAULT_REGION: eu-west-2
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
     depends_on:
       - postgres
 
@@ -45,6 +53,15 @@ services:
       PORT: "8081"
     depends_on:
       - postgres
+  
+  localstack:
+    image: localstack/localstack:4.4.0
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=sqs
+      - SQS_ENDPOINT_STRATEGY=path
+      - LOCALSTACK_HOST=localstack:4566
 
 volumes:
   pgdata:
