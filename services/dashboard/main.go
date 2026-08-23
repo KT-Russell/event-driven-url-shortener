@@ -4,7 +4,9 @@ import (
 	"database/sql"
 	"encoding/json"
 	"log"
+	"net"
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 	"time"
@@ -15,10 +17,7 @@ import (
 var db *sql.DB
 
 func main() {
-	dbURL := os.Getenv("DATABASE_URL")
-	if dbURL == "" {
-		log.Fatal("DATABASE_URL is required")
-	}
+	dbURL := getDatabaseURL()
 
 	var err error
 	db, err = sql.Open("postgres", dbURL)
@@ -183,6 +182,37 @@ func httpError(w http.ResponseWriter, msg string, code int) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	json.NewEncoder(w).Encode(map[string]string{"error": msg})
+}
+
+func getDatabaseURL() string {
+	if dbURL := os.Getenv("DATABASE_URL"); dbURL != "" {
+		return dbURL
+	}
+
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+
+	if dbHost == "" ||
+		dbPort == "" ||
+		dbName == "" ||
+		dbUser == "" ||
+		dbPassword == "" {
+		log.Fatal(
+			"database configuration is incomplete: set DATABASE_URL or DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD",
+		)
+	}
+
+	dsn := &url.URL{
+		Scheme: "postgresql",
+		User:   url.UserPassword(dbUser, dbPassword),
+		Host:   net.JoinHostPort(dbHost, dbPort),
+		Path:   dbName,
+	}
+
+	return dsn.String()
 }
 
 func getEnv(key, fallback string) string {
