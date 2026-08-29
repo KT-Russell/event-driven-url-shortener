@@ -8,13 +8,18 @@ variable "aws_region" {
   type        = string
 }
 
-variable "repository_urls" {
-  description = "ECR repository URLs keyed by service name"
-  type        = map(string)
+variable "api_image" {
+  description = "Full image URL for the API container, including tag"
+  type        = string
 }
 
-variable "image_tag" {
-  description = "Container image tag used by the ECS task definitions"
+variable "worker_image" {
+  description = "Full image URL for the Worker container, including tag"
+  type        = string
+}
+
+variable "dashboard_image" {
+  description = "Full image URL for the Dashboard container, including tag"
   type        = string
 }
 

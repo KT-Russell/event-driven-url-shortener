@@ -40,7 +40,7 @@ resource "aws_ecs_task_definition" "api" {
   container_definitions = jsonencode([
     {
       name      = "api"
-      image     = "${var.repository_urls["api"]}:${var.image_tag}"
+      image     = var.api_image
       essential = true
 
       portMappings = [
@@ -122,7 +122,7 @@ resource "aws_ecs_task_definition" "worker" {
   container_definitions = jsonencode([
     {
       name      = "worker"
-      image     = "${var.repository_urls["worker"]}:${var.image_tag}"
+      image     = var.worker_image
       essential = true
 
       environment = [
@@ -192,7 +192,7 @@ resource "aws_ecs_task_definition" "dashboard" {
   container_definitions = jsonencode([
     {
       name      = "dashboard"
-      image     = "${var.repository_urls["dashboard"]}:${var.image_tag}"
+      image     = var.dashboard_image
       essential = true
 
       portMappings = [

@@ -1,3 +1,15 @@
+
+
+
+locals {
+  api_image       = "${data.aws_ecr_repository.api.repository_url}:${var.image_tag}"
+  worker_image    = "${data.aws_ecr_repository.worker.repository_url}:${var.image_tag}"
+  dashboard_image = "${data.aws_ecr_repository.dashboard.repository_url}:${var.image_tag}"
+}
+
+
+
+
 module "networking" {
   source = "../../modules/networking"
 
@@ -87,8 +99,7 @@ module "messaging" {
     Environment = "dev"
   }
 }
-
-
+/*
 module "ecr" {
   source = "../../modules/ecr"
 
@@ -99,7 +110,19 @@ module "ecr" {
     Environment = "dev"
   }
 }
+*/
 
+data "aws_ecr_repository" "api" {
+  name = "shorturl-dev-api"
+}
+
+data "aws_ecr_repository" "worker" {
+  name = "shorturl-dev-worker"
+}
+
+data "aws_ecr_repository" "dashboard" {
+  name = "shorturl-dev-dashboard"
+}
 
 module "acm" {
   source = "../../modules/acm"
@@ -172,8 +195,11 @@ module "ecs_platform" {
   name_prefix = "shorturl-dev"
   aws_region  = var.aws_region
 
-  repository_urls = module.ecr.repository_urls
-  image_tag       = "bootstrap-amd64"
+  api_image       = local.api_image
+  worker_image    = local.worker_image
+  dashboard_image = local.dashboard_image
+
+
 
   ecs_execution_role_arn = module.iam.ecs_execution_role_arn
 

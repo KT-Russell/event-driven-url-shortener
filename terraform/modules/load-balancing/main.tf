@@ -60,8 +60,8 @@ resource "aws_lb_listener" "http" {
   protocol = "HTTP"
 
   default_action {
-    type             = "redirect"
-    
+    type = "redirect"
+
     redirect {
       port        = "443"
       protocol    = "HTTPS"
@@ -98,10 +98,10 @@ resource "aws_lb_listener_rule" "dashboard" {
 
 resource "aws_lb_listener" "https" {
   load_balancer_arn = aws_lb.main.arn
-  port               = 443
-  protocol           = "HTTPS"
-  ssl_policy         = "ELBSecurityPolicy-TLS13-1-2-2021-06"
-  certificate_arn    = var.certificate_arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn   = var.certificate_arn
 
   default_action {
     type             = "forward"

@@ -59,3 +59,8 @@ variable "alert_email" {
   description = "Email address used for infrastructure alert notifications"
   type        = string
 }
+
+variable "image_tag" {
+  description = "Immutable Git commit SHA used to identify application images"
+  type        = string
+}
