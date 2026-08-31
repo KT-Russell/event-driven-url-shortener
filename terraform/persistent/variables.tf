@@ -41,3 +41,18 @@ variable "github_repository" {
   type        = string
   default     = "event-driven-url-shortener"
 }
+
+variable "github_owner_id" {
+  description = "Immutable GitHub owner ID used in OIDC subject claims"
+  type        = string
+}
+
+variable "github_repository_id" {
+  description = "Immutable GitHub repository ID used in OIDC subject claims"
+  type        = string
+}
+
+variable "initial_image_tag" {
+  description = "Initial successfully published application image tag used when creating the release pointer"
+  type        = string
+}

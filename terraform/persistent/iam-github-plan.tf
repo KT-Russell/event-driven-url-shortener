@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "github_tf_plan_trust" {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
       values = [
-        "repo:${var.github_owner}/${var.github_repository}:ref:refs/heads/main"
+        "repo:${var.github_owner}@${var.github_owner_id}/${var.github_repository}@${var.github_repository_id}:ref:refs/heads/main"
       ]
     }
   }
@@ -294,6 +294,18 @@ data "aws_iam_policy_document" "github_tf_plan" {
     ]
 
     resources = ["*"]
+  }
+
+  statement {
+    sid = "ReadCurrentImageTag"
+
+    actions = [
+      "ssm:GetParameter"
+    ]
+
+    resources = [
+      aws_ssm_parameter.current_image_tag.arn
+    ]
   }
 }
 
