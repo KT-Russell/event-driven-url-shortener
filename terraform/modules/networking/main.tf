@@ -12,6 +12,14 @@ resource "aws_vpc" "main" {
   })
 }
 
+resource "aws_default_security_group" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = merge(var.tags, {
+    Name = "${var.name_prefix}-default-sg"
+  })
+}
+
 resource "aws_subnet" "public" {
   count = 2
 
@@ -19,7 +27,7 @@ resource "aws_subnet" "public" {
   cidr_block        = var.public_subnet_cidrs[count.index]
   availability_zone = var.aws_availability_zones[count.index]
 
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 }
 
 resource "aws_subnet" "private" {
