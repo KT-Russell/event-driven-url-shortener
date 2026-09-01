@@ -120,6 +120,7 @@ data "aws_iam_policy_document" "github_tf_deploy" {
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeInternetGateways",
       "ec2:DescribeManagedPrefixLists",
+      "ec2:DescribeNetworkInterfaces",
       "ec2:DescribePrefixLists",
       "ec2:DescribeRouteTables",
       "ec2:DescribeSecurityGroups",
@@ -184,8 +185,10 @@ data "aws_iam_policy_document" "github_tf_deploy" {
       "elasticloadbalancing:ModifyRule",
       "elasticloadbalancing:AddTags",
       "elasticloadbalancing:RemoveTags",
+      "elasticloadbalancing:SetWebACL",
 
       "elasticloadbalancing:DescribeListeners",
+      "elasticloadbalancing:DescribeListenerAttributes",
       "elasticloadbalancing:DescribeLoadBalancerAttributes",
       "elasticloadbalancing:DescribeLoadBalancers",
       "elasticloadbalancing:DescribeRules",
@@ -214,6 +217,18 @@ data "aws_iam_policy_document" "github_tf_deploy" {
       "rds:DescribeDBInstances",
       "rds:DescribeDBSubnetGroups",
       "rds:ListTagsForResource"
+    ]
+
+    resources = ["*"]
+  }
+  statement {
+    sid = "UseRDSManagedSecretKMS"
+
+    actions = [
+      "kms:CreateGrant",
+      "kms:Decrypt",
+      "kms:GenerateDataKey",
+      "kms:DescribeKey"
     ]
 
     resources = ["*"]
