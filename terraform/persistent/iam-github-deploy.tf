@@ -221,6 +221,17 @@ data "aws_iam_policy_document" "github_tf_deploy" {
 
     resources = ["*"]
   }
+
+  statement {
+  sid = "ManageRDSManagedSecret"
+
+  actions = [
+    "secretsmanager:CreateSecret",
+    "secretsmanager:TagResource",
+  ]
+
+  resources = ["*"]
+}
   statement {
     sid = "UseRDSManagedSecretKMS"
 
