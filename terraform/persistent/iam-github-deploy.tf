@@ -387,6 +387,7 @@ data "aws_iam_policy_document" "github_tf_deploy" {
       "application-autoscaling:DeregisterScalableTarget",
       "application-autoscaling:PutScalingPolicy",
       "application-autoscaling:DeleteScalingPolicy",
+      "application-autoscaling:ListTagsForResource",
       "application-autoscaling:TagResource",
       "application-autoscaling:UntagResource",
       "application-autoscaling:DescribeScalableTargets",

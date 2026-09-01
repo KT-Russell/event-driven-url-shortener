@@ -273,6 +273,7 @@ data "aws_iam_policy_document" "github_tf_plan" {
       "application-autoscaling:DescribeScalableTargets",
       "application-autoscaling:DescribeScalingActivities",
       "application-autoscaling:DescribeScalingPolicies",
+      "application-autoscaling:ListTagsForResource",
     ]
 
     resources = ["*"]
