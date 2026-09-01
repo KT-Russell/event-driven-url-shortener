@@ -92,6 +92,7 @@ data "aws_iam_policy_document" "github_tf_plan" {
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeInternetGateways",
       "ec2:DescribeManagedPrefixLists",
+      "ec2:DescribeNetworkInterfaces",
       "ec2:DescribePrefixLists",
       "ec2:DescribeRouteTables",
       "ec2:DescribeSecurityGroups",
@@ -129,6 +130,7 @@ data "aws_iam_policy_document" "github_tf_plan" {
 
     actions = [
       "elasticloadbalancing:DescribeListeners",
+      "elasticloadbalancing:DescribeListenerAttributes",
       "elasticloadbalancing:DescribeLoadBalancerAttributes",
       "elasticloadbalancing:DescribeLoadBalancers",
       "elasticloadbalancing:DescribeRules",
