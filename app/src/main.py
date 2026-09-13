@@ -1,3 +1,7 @@
+from pathlib import Path
+
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import RedirectResponse
 import os, hashlib, time, json
@@ -7,7 +11,20 @@ from .cache import get_url, set_url
 
 app = FastAPI()
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_DIR = BASE_DIR / "static"
 
+app.mount(
+    "/static",
+    StaticFiles(directory=STATIC_DIR),
+    name="static",
+)
+
+@app.get("/", include_in_schema=False)
+async def homepage():
+    return FileResponse(STATIC_DIR / "index.html")
+
+    
 @app.get("/healthz")
 def health():
     return {"status": "ok", "ts": int(time.time()), "db": get_backend_type()}

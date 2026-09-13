@@ -17,6 +17,7 @@ RUN useradd --create-home --uid 10001 appuser
 
 COPY --from=builder /opt/venv /opt/venv
 COPY src ./src
+COPY static ./static
 
 ENV PATH="/opt/venv/bin:$PATH"
 

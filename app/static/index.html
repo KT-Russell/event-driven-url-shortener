@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShortURL 98</title>
+
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+
+    <div class="desktop">
+
+        <header class="top-bar">
+            <div class="brand">
+                SHORTURL 98
+            </div>
+
+            <div class="status">
+                <span class="status-light"></span>
+                SYSTEM ONLINE
+            </div>
+        </header>
+
+        <main class="window">
+
+            <div class="window-title">
+                <span>URL SHORTENING TERMINAL</span>
+
+                <div class="window-controls">
+                    <button aria-label="minimise">_</button>
+                    <button aria-label="maximise">□</button>
+                    <button aria-label="close">×</button>
+                </div>
+            </div>
+
+            <nav class="menu-bar">
+                <span><u>F</u>ile</span>
+                <span><u>E</u>dit</span>
+                <span><u>V</u>iew</span>
+                <span><u>T</u>ools</span>
+                <span><u>H</u>elp</span>
+            </nav>
+
+            <section class="window-body">
+
+                <div class="intro">
+                    <h1>Shorten a URL</h1>
+
+                    <p>
+                        Enter a long web address below and generate a compact link.
+                    </p>
+                </div>
+
+                <form id="shorten-form" class="shorten-form">
+
+                    <label for="long-url">
+                        LONG URL:
+                    </label>
+
+                    <div class="input-row">
+                        <input
+                            id="long-url"
+                            name="url"
+                            type="url"
+                            placeholder="https://example.com/a/really/long/address"
+                            autocomplete="url"
+                            required
+                        >
+
+                        <button id="shorten-button" type="submit">
+                            SHORTEN
+                        </button>
+                    </div>
+
+                </form>
+
+                <div id="message" class="message" hidden></div>
+
+                <section id="result-panel" class="result-panel" hidden>
+
+                    <div class="panel-heading">
+                        GENERATED SHORT LINK
+                    </div>
+
+                    <div class="result-content">
+
+                        <a
+                            id="short-url"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        ></a>
+
+                        <button id="copy-button" type="button">
+                            COPY
+                        </button>
+
+                    </div>
+
+                </section>
+
+                <div class="divider"></div>
+
+                <section class="analytics">
+
+                    <div class="section-heading">
+                        NETWORK STATISTICS
+                    </div>
+
+                    <div class="stats-grid">
+
+                        <article class="stat-card">
+                            <span class="stat-label">
+                                TOTAL URLS
+                            </span>
+
+                            <strong id="total-urls">
+                                --
+                            </strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <span class="stat-label">
+                                TOTAL CLICKS
+                            </span>
+
+                            <strong id="total-clicks">
+                                --
+                            </strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <span class="stat-label">
+                                CLICKS TODAY
+                            </span>
+
+                            <strong id="clicks-today">
+                                --
+                            </strong>
+                        </article>
+
+                    </div>
+
+                    <div class="analytics-footer">
+                        <span>
+                            ANALYTICS SERVICE:
+                        </span>
+
+                        <strong id="analytics-status">
+                            CONNECTING...
+                        </strong>
+                    </div>
+
+                </section>
+
+                <section class="system-log">
+
+                    <div class="system-log-title">
+                        SYSTEM LOG
+                    </div>
+
+                    <div id="system-log-content">
+                        <p>&gt; CLIENT INITIALIZED</p>
+                        <p>&gt; WAITING FOR INPUT...</p>
+                    </div>
+
+                </section>
+
+            </section>
+
+            <footer class="window-footer">
+                <span>ShortURL Network Services</span>
+                <span>API: ONLINE</span>
+                <span>READY</span>
+            </footer>
+
+        </main>
+
+        <footer class="page-footer">
+            EVENT-DRIVEN URL SHORTENER // AWS ECS PLATFORM
+        </footer>
+
+    </div>
+
+    <script src="/static/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,513 @@
+:root {
+    --desktop: #008080;
+    --window: #c0c0c0;
+    --dark: #000000;
+    --mid: #808080;
+    --light: #ffffff;
+    --navy: #000080;
+    --green: #00aa00;
+    --danger: #aa0000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.02),
+            rgba(255, 255, 255, 0.02) 1px,
+            transparent 1px,
+            transparent 3px
+        ),
+        var(--desktop);
+
+    color: #000;
+
+    font-family:
+        "Courier New",
+        Courier,
+        monospace;
+}
+
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.035) 0px,
+            rgba(0, 0, 0, 0.035) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    z-index: 9999;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.desktop {
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.top-bar {
+    width: min(960px, 100%);
+    margin: 0 auto 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.brand {
+    letter-spacing: 2px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-light {
+    display: inline-block;
+
+    width: 9px;
+    height: 9px;
+
+    background: #00ff00;
+
+    border: 1px solid #003300;
+
+    box-shadow:
+        0 0 6px #00ff00;
+}
+
+.window {
+    width: min(960px, 100%);
+    margin: 0 auto;
+
+    background: var(--window);
+
+    border-top: 3px solid var(--light);
+    border-left: 3px solid var(--light);
+    border-right: 3px solid #404040;
+    border-bottom: 3px solid #404040;
+
+    box-shadow:
+        8px 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.window-title {
+    min-height: 36px;
+
+    padding: 5px 6px 5px 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: var(--navy);
+    color: white;
+
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.window-controls {
+    display: flex;
+    gap: 3px;
+}
+
+.window-controls button {
+    width: 25px;
+    height: 24px;
+
+    padding: 0;
+
+    background: var(--window);
+
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid #303030;
+    border-bottom: 2px solid #303030;
+
+    font-weight: bold;
+    line-height: 18px;
+}
+
+.menu-bar {
+    display: flex;
+    gap: 22px;
+
+    padding: 6px 10px;
+
+    background: #c0c0c0;
+
+    border-bottom: 2px solid #808080;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.menu-bar span {
+    cursor: default;
+
+    padding: 2px 4px;
+}
+
+.menu-bar span:hover {
+    background: #000080;
+    color: white;
+}
+
+.window-body {
+    padding: clamp(22px, 5vw, 52px);
+}
+
+.intro {
+    margin-bottom: 32px;
+}
+
+.intro h1 {
+    margin: 0 0 10px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(28px, 5vw, 48px);
+    letter-spacing: -2px;
+}
+
+.intro p {
+    margin: 0;
+
+    color: #303030;
+    font-size: 14px;
+}
+
+.shorten-form label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    gap: 10px;
+}
+
+.input-row input {
+    min-width: 0;
+
+    padding: 14px;
+
+    background: white;
+
+    border-top: 3px solid #404040;
+    border-left: 3px solid #404040;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+
+    outline: none;
+}
+
+.input-row input:focus {
+    outline: 2px dotted #000080;
+    outline-offset: -6px;
+}
+
+button {
+    cursor: pointer;
+
+    background: var(--window);
+
+    border-top: 3px solid white;
+    border-left: 3px solid white;
+    border-right: 3px solid #404040;
+    border-bottom: 3px solid #404040;
+
+    color: black;
+
+    font-weight: bold;
+}
+
+button:active {
+    border-top: 3px solid #404040;
+    border-left: 3px solid #404040;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+
+    transform: translate(1px, 1px);
+}
+
+#shorten-button {
+    min-width: 130px;
+    padding: 0 18px;
+}
+
+.message {
+    margin-top: 16px;
+
+    padding: 10px;
+
+    border: 2px inset #aaa;
+
+    font-size: 13px;
+}
+
+.message.error {
+    color: var(--danger);
+}
+
+.result-panel {
+    margin-top: 24px;
+
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+}
+
+.panel-heading,
+.section-heading {
+    padding: 8px 10px;
+
+    background: #808080;
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.result-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 18px;
+
+    background: white;
+}
+
+.result-content a {
+    flex: 1;
+
+    overflow-wrap: anywhere;
+
+    color: #0000ee;
+
+    font-weight: bold;
+}
+
+#copy-button {
+    padding: 8px 18px;
+}
+
+.divider {
+    height: 2px;
+
+    margin: 38px 0;
+
+    border-top: 2px solid #808080;
+    border-bottom: 2px solid white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-top: 14px;
+}
+
+.stat-card {
+    min-height: 150px;
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: #d4d0c8;
+
+    border-top: 3px solid white;
+    border-left: 3px solid white;
+    border-right: 3px solid #404040;
+    border-bottom: 3px solid #404040;
+}
+
+.stat-label {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.stat-card strong {
+    display: block;
+
+    margin-top: 18px;
+    padding: 12px;
+
+    background: #000000;
+    color: #00ff00;
+
+    border-top: 3px solid #404040;
+    border-left: 3px solid #404040;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+
+    font-family: "Courier New", monospace;
+    font-size: 38px;
+    line-height: 1;
+
+    text-align: right;
+
+    text-shadow: 0 0 4px #00ff00;
+}
+
+.analytics-footer {
+    margin-top: 16px;
+
+    padding: 9px;
+
+    background: black;
+    color: #00ff00;
+
+    font-size: 11px;
+}
+
+.system-log {
+    margin-top: 22px;
+
+    background: #000000;
+
+    border-top: 3px solid #404040;
+    border-left: 3px solid #404040;
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+}
+
+.system-log-title {
+    padding: 7px 10px;
+
+    background: #808080;
+    color: white;
+
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#system-log-content {
+    min-height: 95px;
+    max-height: 150px;
+
+    padding: 10px 12px;
+
+    overflow-y: auto;
+
+    color: #00ff00;
+
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+}
+
+#system-log-content p {
+    margin: 3px 0;
+}
+
+.window-footer {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 4px;
+
+    padding: 4px;
+
+    border-top: 2px solid white;
+
+    font-size: 10px;
+}
+
+.window-footer span {
+    padding: 4px 8px;
+
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+}
+
+.page-footer {
+    width: min(960px, 100%);
+
+    margin: 18px auto 0;
+
+    color: white;
+
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 680px) {
+    .desktop {
+        padding: 10px;
+    }
+
+    .top-bar {
+        gap: 12px;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .menu-bar {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .input-row {
+        grid-template-columns: 1fr;
+    }
+
+    #shorten-button {
+        min-height: 48px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .result-content {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .window-footer {
+        grid-template-columns: 1fr;
+    }
+}
